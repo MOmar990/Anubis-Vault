@@ -1,0 +1,12 @@
+2024-12-17 21:34:18,505 - INFO - Validated paths: ['/home/ghost/Desktop/majecty/test-sample2.txt']
+2024-12-17 21:34:22,178 - INFO - Data successfully compressed into /home/ghost/Desktop/majecty/test-sample2.txt.zip
+2024-12-17 21:34:22,260 - INFO - File successfully encrypted into /home/ghost/Desktop/majecty/test-sample2.txt.zip.enc
+2024-12-17 21:34:22,260 - INFO - Securely deleted /home/ghost/Desktop/majecty/test-sample2.txt.zip
+2024-12-17 21:34:22,260 - INFO - Encrypted /home/ghost/Desktop/majecty/test-sample2.txt into /home/ghost/Desktop/majecty/test-sample2.txt.zip.enc
+2024-12-17 21:34:40,401 - INFO - Validated paths: ['/home/ghost/Desktop/majecty/test-sample2.txt.zip.enc']
+2024-12-17 21:34:43,579 - INFO - File successfully decrypted into /home/ghost/Desktop/majecty/test-sample2.txt.zip_decrypted.zip.zip
+2024-12-17 21:34:43,579 - INFO - Decrypted /home/ghost/Desktop/majecty/test-sample2.txt.zip.enc into /home/ghost/Desktop/majecty/test-sample2.txt.zip_decrypted.zip.zip
+2024-12-17 21:34:43,580 - INFO - Successfully extracted /home/ghost/Desktop/majecty/test-sample2.txt.zip_decrypted.zip.zip to /home/ghost/Desktop/majecty/test-sample2.txt_decrypted
+2024-12-17 21:34:43,580 - INFO - Securely deleted /home/ghost/Desktop/majecty/test-sample2.txt.zip_decrypted.zip.zip
+2024-12-17 21:34:43,580 - INFO - Securely deleted /home/ghost/Desktop/majecty/test-sample2.txt.zip.enc
+2024-12-17 21:35:06,448 - INFO - User exited the tool.
