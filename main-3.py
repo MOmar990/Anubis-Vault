@@ -40,7 +40,7 @@ def derive_key(password, salt):
         algorithm=hashes.SHA256(),
         length=32,
         salt=salt,
-        iterations=200000,  # Increased iterations for stronger key derivation
+        iterations=200000,  
         backend=default_backend()
     )
     return kdf.derive(password.encode())
@@ -124,7 +124,7 @@ def encrypt_files(files, password):
             compress_to_zip(file, zip_file)
             encrypted_file = zip_file + '.enc'
             encrypt_file(zip_file, encrypted_file, password)
-            secure_delete(zip_file)  # Delete the zip file after encryption
+            secure_delete(zip_file)  
             print(f"Encrypted {file} into {encrypted_file}")
         except Exception as e:
             print(f"Error encrypting {file}: {e}")
@@ -134,7 +134,7 @@ def decrypt_files(files, password):
     """Decrypt multiple files, try default password for all, then ask for passwords separately."""
     mismatched_files = []
 
-    # Try default password for all files first
+    
     for file in files:
         zip_file = file + '.zip'
         output_file = zip_file.replace('.enc', '_decrypted.zip')
@@ -145,7 +145,7 @@ def decrypt_files(files, password):
         except Exception:
             mismatched_files.append(file)
 
-    # Handle mismatched files by prompting for individual passwords
+    
     if mismatched_files:
         print(f"Default password didn't work for {len(mismatched_files)} file(s). Please enter passwords for each.")
         for file in mismatched_files:
@@ -167,9 +167,9 @@ def decrypt_files(files, password):
             extract_dir = output_file.replace('.zip', '')
             extract_zip(output_file, extract_dir)
 
-            # Delete the encrypted zip file after extraction
-            secure_delete(output_file)  # This will delete the decrypted .zip file
-            secure_delete(file)        # This will delete the encrypted .enc file as well
+            
+            secure_delete(output_file)  
+            secure_delete(file)        
 
 
 def encryption_mode():
@@ -182,7 +182,7 @@ def encryption_mode():
             password = getpass("Enter a strong password for encryption: ")
             encrypt_files(paths, password)
 
-            # Ask if the user wants to continue in encryption mode or go back to the main menu
+            
             choice = input("\nDo you want to perform another encryption or go back to the main menu? (y to continue, b to go back): ").lower()
             if choice == 'b':
                 break

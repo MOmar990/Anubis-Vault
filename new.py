@@ -11,7 +11,7 @@ from typing import Optional, Dict, List, Tuple, Any
 from dataclasses import dataclass
 from tqdm import tqdm
 
-# Cryptography imports
+
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes, serialization, padding
@@ -101,7 +101,7 @@ class AES256(EncryptionAlgorithm):
 
     @property
     def key_size(self) -> int:
-        return 32  # 256 bits
+        return 32  
 
 
 class ChaCha20Impl(EncryptionAlgorithm):
@@ -200,12 +200,12 @@ class SecureEncryption:
         self.output_dir = base_dir / "encrypted"
         self.temp_dir = base_dir / "temp"
 
-        # Create necessary directories
+        
         for directory in [self.keys_dir, self.output_dir, self.temp_dir]:
             directory.mkdir(parents=True, exist_ok=True)
         self.key_manager = KeyManager(self.keys_dir)
 
-    # Other methods remain unchanged
+    
 
 
 def main():
@@ -224,13 +224,13 @@ def main():
         choice = input("\nSelect an option: ")
 
         if choice == '1':
-            # Encrypt files implementation
+            
             pass
         elif choice == '2':
-            # Decrypt file implementation
+            
             pass
         elif choice == '3':
-            # Secure delete file implementation
+            
             pass
         elif choice == '4':
             print("Goodbye!")
