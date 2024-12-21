@@ -1,0 +1,12 @@
+{
+    "salt_length": 64,
+    "iv_length": 16,
+    "key_length": 32,
+    "iterations": 500000,
+    "compression_level": 9,
+    "output_dir": "secure_files",
+    "temp_dir": ".temp",
+    "hash_algorithm": "sha256",
+    "cleanup_temp": true,
+    "archive_previous": true
+}
