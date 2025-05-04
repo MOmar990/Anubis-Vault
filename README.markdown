@@ -1,140 +1,140 @@
-# Advanced Encryption Tool
+# Anubis Vault
 
 ![Python](https://img.shields.io/badge/Python-3.6%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-*ZAP!* Secure your files with military-grade AES-256 encryption, hide them in images like a comic-book ninja, and enjoy a colorful, user-friendly interface! The **Advanced Encryption Tool** is your go-to solution for protecting sensitive data, complete with a dependency wizard that magically handles setup. Perfect for developers, security enthusiasts, and anyone who loves a touch of superhero flair.
+*ZAP!* Seal your secrets in the **Anubis Vault**, where the Egyptian god of protection guards your files with AES-256 encryption and mystical steganography. This powerful Python tool combines security, stealth, and a vibrant, comic-book-style interface, with a dependency wizard to summon required relics (`cryptography`, `stegano`, `Pillow`, `colorama`). Perfect for guardians of sensitive data who crave an Anubis-inspired adventure!
 
 ## Introduction
 
-This tool combines robust AES-256 encryption, stealthy steganography, and file compression into a single, easy-to-use Python application. Whether you’re locking down documents or hiding secrets in PNGs, the tool’s vibrant UI and automated dependency wizard make it a breeze. Run it, follow the prompts, and let the wizard install any missing packages (`cryptography`, `stegano`, `Pillow`, `colorama`)—no cape required!
+The **Anubis Vault** is your sacred chamber for encrypting files with military-grade AES-256, hiding them in PNG sarcophagi, and compressing them for efficiency. Guided by Anubis, the guardian of secrets, the tool offers a colorful, user-friendly interface with progress spinners and hieroglyphic flair. Its dependency wizard ensures a smooth setup by automatically installing missing packages, making it ideal for developers, security enthusiasts, and fans of Egyptian mysticism.
 
 ## Features
 
-- **AES-256 Encryption**: Lock files with industry-standard encryption, secured by a password-derived key.
-- **Steganography**: *BAM!* Hide encrypted files inside PNG images for extra stealth.
-- **File Compression**: Squash files before encryption to save space and speed things up.
-- **Colorful UI**: Enjoy a vibrant, comic-book-style interface with clear prompts, progress spinners, and organized output.
-- **Dependency Wizard**: Automatically detects and installs missing dependencies on first run.
-- **Configurable Settings**: Tweak salt length, PBKDF2 iterations, and output directories via a guided menu.
-- **Cross-Platform**: Runs smoothly on Windows, Linux, and macOS.
-- **Integrity Checks**: Verifies file integrity with SHA-256 hashes to detect tampering.
-- **Easter Egg**: Try menu option “42” for a cosmic surprise!
+- **AES-256 Encryption**: Seal scrolls with unbreakable encryption, protected by a sacred oath.
+- **Steganography**: *BAM!* Conceal encrypted files in PNG sarcophagi for ultimate stealth.
+- **File Compression**: Mummify files before sealing to save space and time.
+- **Vibrant UI**: Navigate with a colorful, Anubis-themed interface, complete with spinners and comic-book zingers.
+- **Dependency Wizard**: Summons missing relics (`cryptography`, `stegano`, `Pillow`, `colorama`) on first run.
+- **Configurable Runes**: Carve settings like salt length or output directories in `anubis_config.json`.
+- **Cross-Platform**: Operates in Windows, Linux, and macOS temples.
+- **Integrity Checks**: Verifies scrolls with SHA-256 hashes to detect tampering.
+- **Easter Egg**: Choose ritual “42” for a cosmic revelation!
 
 ## Installation
 
 ### Prerequisites
 - Python 3.6 or higher.
-- `pip` for installing dependencies.
+- `pip` for summoning relics.
 
 ### Steps
-1. **Clone the Repository**:
+1. **Enter the Temple**:
    ```bash
-   git clone https://github.com/yourusername/advanced-encryption-tool.git
-   cd advanced-encryption-tool
+   git clone https://github.com/yourusername/anubis-vault.git
+   cd anubis-vault
    ```
 
-2. **Run the Tool**:
+2. **Invoke the Vault**:
    ```bash
-   python enhanced-encryption-tool.py
+   python anubis_vault.py
    ```
-   On first run, the **dependency wizard** checks for `cryptography`, `stegano`, `Pillow`, and `colorama`. If any are missing, it prompts to install them automatically. Just type `y` to let it work its magic!
+   The **dependency wizard** will check for `cryptography`, `stegano`, `Pillow`, and `colorama`. If any are missing, it offers to summon them. Type `y` to let Anubis handle it!
 
-3. **Manual Dependency Installation** (if you prefer):
+3. **Manual Summoning** (if preferred):
    ```bash
    pip install cryptography stegano Pillow colorama
    ```
 
-4. **Virtual Environment** (recommended):
+4. **Sacred Chamber** (recommended):
    ```bash
-   python -m venv myenv
-   source myenv/bin/activate  # On Windows: myenv\Scripts\activate
+   python -m venv anubis_env
+   source anubis_env/bin/activate  # On Windows: anubis_env\Scripts\activate
    pip install cryptography stegano Pillow colorama
-   python enhanced-encryption-tool.py
+   python anubis_vault.py
    ```
 
 ## Usage
 
-1. **Launch the Tool**:
+1. **Open the Vault**:
    ```bash
-   python enhanced-encryption-tool.py
+   python anubis_vault.py
    ```
-   You’ll see a colorful menu:
+   Behold the sacred menu:
    ```
    ==============================
-       Advanced Encryption Tool
-     *ZAP!* Secure Files in a Snap!
+           Anubis Vault
+   Protected by the Guardian of Secrets!
    ==============================
-     [1] Encrypt File
-     [2] Decrypt File
-     [3] Configure Settings
-     [4] Exit
+     [1] Seal Scroll
+     [2] Release Scroll
+     [3] Carve Runes
+     [4] Depart
    ------------------------------
-   Pick your poison:
+   Choose your ritual:
    ```
 
-2. **Encrypt a File**:
-   - Choose `[1] Encrypt File`.
-   - Enter the absolute path to your file (e.g., `/path/to/document.pdf`).
-   - Add more files or proceed.
-   - Set a strong password (12+ characters, mix letters, numbers, symbols).
-   - Optionally hide the encrypted file in a PNG (needs a large image, e.g., 1920x1080).
+2. **Seal a Scroll**:
+   - Choose `[1] Seal Scroll`.
+   - Enter the absolute path to your scroll (e.g., `/path/to/secret_scroll.txt`).
+   - Add more scrolls or proceed.
+   - Swear a strong oath (12+ characters, mix letters, numbers, symbols).
+   - Optionally conceal the sealed scroll in a PNG sarcophagus (needs a large image, e.g., 1920x1080).
    - Example:
      ```bash
-     File to encrypt (absolute path like /path/to/file.pdf, q to cancel): /home/user/test.txt
-     Add another file? (y/n): n
-     Password: ********
-     Confirm password: ********
-     Hide in an image? (y/n, needs a big PNG like 1920x1080): y
-     Enter image path (e.g., /path/to/image.png, q to cancel): /home/user/carrier.png
+     Scroll to seal (absolute path like /path/to/secret_scroll.txt, q to cancel): /home/user/secret_scroll.txt
+     Add another scroll? (y/n): n
+     Oath: ********
+     Confirm oath: ********
+     Hide in a sarcophagus? (y/n, needs a large PNG like 1920x1080): y
+     Enter sarcophagus path (e.g., /path/to/sarcophagus.png, q to cancel): /home/user/sarcophagus.png
      ```
-   - Output: Encrypted file in `secure_files/encrypted/<timestamp>/` and optional stego PNG in `secure_files/stego/<timestamp>/`.
+   - Output: Sealed scroll in `secure_files/encrypted/<timestamp>/` and optional stego PNG in `secure_files/stego/<timestamp>/`.
 
-3. **Decrypt a File**:
-   - Choose `[2] Decrypt File`.
-   - Enter the path to the `.enc` file or stego `.png`.
-   - Provide the password.
-   - For stego, specify the original file name (without extension).
+3. **Release a Scroll**:
+   - Choose `[2] Release Scroll`.
+   - Enter the path to the `.enc` scroll or stego `.png`.
+   - Provide the sacred oath.
+   - For stego, name the original scroll (e.g., `papyrus`).
    - Example:
      ```bash
-     File to decrypt (.enc or .png, absolute path like /path/to/file, q to cancel): secure_files/stego/20250504_180303/carrier.png
-     Add another file? (y/n): n
-     Password: ********
-     Original file name (no extension, e.g., example_file, q to cancel): test
+     Scroll to release (.enc or .png, absolute path like /path/to/scroll, q to cancel): secure_files/stego/20250504_180303/sarcophagus.png
+     Add another scroll? (y/n): n
+     Oath: ********
+     Original scroll name (no extension, e.g., papyrus, q to cancel): papyrus
      ```
-   - Output: Decrypted file in `secure_files/decrypted/<timestamp>/` with detected extension (e.g., `.txt`).
+   - Output: Released scroll in `secure_files/decrypted/<timestamp>/` with detected extension (e.g., `.txt`).
 
-4. **Configure Settings**:
-   - Choose `[3] Configure Settings`.
-   - Adjust settings like `salt_length` or `output_dir` with descriptions from `encryption_config.json`.
+4. **Carve Runes**:
+   - Choose `[3] Carve Runes`.
+   - Adjust runes like `salt_length` with guidance from `anubis_config.json`.
    - Example:
      ```
      --- salt_length ---
-     Description: Bytes for the salt. More = spicier security! Stick with 32 unless you're feeling wild.
+     Inscription: Bytes for the salt. More = spicier security! Stick with 32 unless you're feeling wild.
      Current: 32
-     New value: 64
+     New rune: 64
      ```
 
 5. **Tips**:
-   - Use absolute paths (e.g., `/home/user/file.txt`, not `file.txt`).
-   - For stego, ensure the carrier image is large enough (tool suggests dimensions if too small).
-   - Cancel any prompt with `q`.
-   - Check `encryption_config.json` for advanced settings.
+   - Use absolute paths (e.g., `/home/user/secret_scroll.txt`).
+   - Ensure sarcophagus PNGs are large enough (Anubis suggests dimensions if too small).
+   - Cancel rituals with `q`.
+   - Consult `anubis_config.json` for advanced runes.
 
 ## Screenshots
 
-*Coming soon! Add screenshots of the colorful UI, menu, or encryption process to showcase the comic-book style. For now, try running the tool to see the vibrant interface!*
+*Coming soon! Add hieroglyphs of the vibrant UI, sacred menu, or sealing ritual to showcase Anubis’ flair. For now, invoke the vault to witness the mysticism!*
 
 ## Troubleshooting
 
-- **Dependency Wizard Fails**:
-  - Ensure `pip` is installed and accessible:
+- **Wizard Fails to Summon**:
+  - Ensure `pip` is ready:
     ```bash
     python -m ensurepip --upgrade
     python -m pip install --upgrade pip
     ```
-  - Install manually:
+  - Summon manually:
     ```bash
     pip install cryptography stegano Pillow colorama
     ```
@@ -143,36 +143,36 @@ This tool combines robust AES-256 encryption, stealthy steganography, and file c
     pip install cryptography stegano Pillow colorama --user
     ```
 
-- **Path Errors**:
-  - Use absolute paths (e.g., `/home/user/file.txt`).
-  - Ensure files exist and are readable.
+- **Lost Scrolls**:
+  - Use absolute paths (e.g., `/home/user/secret_scroll.txt`).
+  - Ensure scrolls exist and are readable.
 
-- **Stego Image Too Small**:
-  - The tool will suggest required dimensions (e.g., “Need a 1920x1080 PNG”).
-  - Use a larger PNG or skip stego.
+- **Small Sarcophagus**:
+  - Anubis will suggest required dimensions (e.g., “Need a 1920x1080 PNG”).
+  - Use a larger PNG or skip concealment.
 
-- **Password Issues**:
-  - Ensure the password matches the one used for encryption.
-  - Use strong passwords (12+ characters, mixed characters).
+- **Oath Forgotten**:
+  - Ensure the oath matches the one used to seal.
+  - Use strong oaths (12+ characters, mixed characters).
 
-- **Still Stuck?**:
-  - Open an issue on GitHub with the error message and steps to reproduce.
+- **Still Cursed?**:
+  - Open an issue on GitHub with the curse details and ritual steps.
 
 ## Contributing
 
-We’d love your help to make this tool even more super! To contribute:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/awesome-update`).
-3. Commit changes (`git commit -m "Add awesome update"`).
-4. Push to the branch (`git push origin feature/awesome-update`).
-5. Open a pull request with a clear description.
+Join Anubis’ guardians! To contribute:
+1. Fork the temple.
+2. Create a ritual branch (`git checkout -b ritual/awesome-rune`).
+3. Inscribe changes (`git commit -m "Add awesome rune"`).
+4. Push to the branch (`git push origin ritual/awesome-rune`).
+5. Open a pull request with a clear inscription.
 
-Please follow the code style, keep the comic-book tone, and add tests for new features.
+Keep the Anubis vibe, follow the code style, and add tests for new rituals.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is guarded under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-Have questions or ideas? Open an issue on GitHub or contribute directly. Let’s make encryption fun and secure! *WHAM!*
+Questions or visions? Open an issue on GitHub or join the guardians. Let’s seal secrets with Anubis! *KA-BOOM!*

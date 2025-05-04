@@ -4,7 +4,7 @@ import sys
 import time
 import os
 
-# *KABOOM!* Checking if we've got our superhero tools before we start!
+# *KABOOM!* Anubis guards the vault, checking for our sacred tools!
 def check_dependencies() -> None:
     dependencies = {'cryptography': 'cryptography', 'stegano': 'stegano', 'Pillow': 'PIL', 'colorama': 'colorama'}
     missing = []
@@ -16,38 +16,38 @@ def check_dependencies() -> None:
             missing.append(name)
     
     if not missing:
-        print("All gadgets ready! Time to save the day!")
+        print("All artifacts ready! Anubis approves!")
         return
     
-    print(f"Holy missing modules, Batman! We need: {', '.join(missing)}")
-    install = input("Shall I fetch them with pip? (y/n): ").lower()
+    print(f"Holy missing relics, Pharaoh! We need: {', '.join(missing)}")
+    install = input("Shall I summon them with pip? (y/n): ").lower()
     if install != 'y':
-        print("No prob! Grab 'em yourself with:")
+        print("No worries! Fetch them yourself with:")
         print("  pip install cryptography stegano Pillow colorama")
-        print("Then call me back!")
+        print("Then return to the vault!")
         sys.exit(1)
     
-    print("Hold onto your cape, installing...")
+    print("Hold onto your ankh, summoning...")
     for dep in missing:
         try:
             subprocess.run([sys.executable, '-m', 'pip', 'install', dep], check=True)
-            print(f"{dep} is locked and loaded!")
+            print(f"{dep} is enshrined in the vault!")
         except subprocess.CalledProcessError:
-            print(f"Oof, {dep} didn't install. Try this:")
+            print(f"Oof, {dep} resisted the summons. Try this:")
             print(f"  pip install {dep}")
-            print("Check your pip or permissions, hero!")
+            print("Check your pip or permissions, guardian!")
             sys.exit(1)
     
-    print("All systems go! Let’s do this!")
+    print("All relics secured! Let’s open the vault!")
     try:
         for name, module in dependencies.items():
             importlib.import_module(module)
     except ImportError:
-        print("Something’s still funky. Install manually:")
+        print("Something’s still cursed. Install manually:")
         print("  pip install cryptography stegano Pillow colorama")
         sys.exit(1)
 
-# *BZZT!* Make sure we’ve got our tools before we load the big guns!
+# *BZZT!* Ensuring our tools are ready before Anubis opens the vault!
 check_dependencies()
 
 if __name__ == "__main__":
@@ -71,10 +71,10 @@ if __name__ == "__main__":
     from stegano import lsb
     from colorama import init, Fore, Style
 
-    # *FLASH!* Setting up our colorful console magic!
+    # *FLASH!* Setting up our colorful hieroglyphs!
     init()
 
-    # *SPIN!* Simple spinner to show we’re working hard!
+    # *SPIN!* Simple spinner to show Anubis is at work!
     def spinner(message: str, duration: float = 1.0) -> None:
         spinner_chars = '|/-\\'
         for _ in range(int(duration * 4)):
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         print("\r" + " " * (len(message) + 2), end="\r")
 
     class EncryptionConfig:
-        # Yo, I'm the config boss, holding all the secrets for how we encrypt stuff!
+        # Yo, I'm the scribe, recording Anubis’ sacred vault settings!
         DEFAULT_CONFIG = {
             "salt_length": 32,
             "iv_length": 16,
@@ -98,12 +98,12 @@ if __name__ == "__main__":
             "cleanup_temp": True
         }
 
-        def __init__(self, config_file: str = "encryption_config.json"):
+        def __init__(self, config_file: str = "anubis_config.json"):
             self.config_file = config_file
             self.config = self.DEFAULT_CONFIG.copy()
             self.load_config()
 
-        # *SLURP!* Sucking in the config file, but ignoring those chatty _comments.
+        # *SLURP!* Inscribing the config scroll, ignoring those chatty _comments.
         def load_config(self) -> None:
             try:
                 if os.path.exists(self.config_file):
@@ -112,9 +112,9 @@ if __name__ == "__main__":
                         self._comments = data.pop('_comments', {})
                         self.config.update(data)
             except Exception as e:
-                print(f"{Fore.RED}🚫 Config file threw a tantrum: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Config scroll cursed: {e}{Style.RESET_ALL}")
 
-        # *SPLAT!* Spitting out the config to disk for next time.
+        # *SPLAT!* Etching the config onto the vault walls!
         def save_config(self) -> bool:
             try:
                 with open(self.config_file, 'w') as f:
@@ -123,7 +123,7 @@ if __name__ == "__main__":
                     json.dump(data, f, indent=4)
                 return True
             except Exception as e:
-                print(f"{Fore.RED}🚫 Couldn't save config: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Couldn't etch config: {e}{Style.RESET_ALL}")
                 return False
 
         def get(self, key: str):
@@ -136,7 +136,7 @@ if __name__ == "__main__":
                 raise ValueError(f"Unknown config key: {key}")
 
     class FileCompressor:
-        # I'm the cruncher, squashing files so they fit snugly in our encryption vault!
+        # I'm the embalmer, mummifying files for the vault!
         def __init__(self, config: EncryptionConfig):
             self.config = config
             self._setup_temp_dir()
@@ -144,10 +144,10 @@ if __name__ == "__main__":
         def _setup_temp_dir(self) -> None:
             os.makedirs(self.config.get('temp_dir'), exist_ok=True)
 
-        # *CRUNCH!* Zipping your file into a tiny package, ready for encryption!
+        # *CRUNCH!* Wrapping your file in sacred bandages!
         def compress(self, input_path: str, output_zip: str) -> bool:
             try:
-                spinner("Compressing file...")
+                spinner("Mummifying file...")
                 temp_gzip = Path(self.config.get('temp_dir')) / f"{Path(input_path).name}.gz"
                 with open(input_path, 'rb') as in_file, gzip.open(temp_gzip, 'wb', compresslevel=9) as gz_file:
                     shutil.copyfileobj(in_file, gz_file)
@@ -158,10 +158,10 @@ if __name__ == "__main__":
                 
                 with zipfile.ZipFile(output_zip, 'r') as zipf:
                     if zipf.testzip() is not None:
-                        raise zipfile.BadZipFile("ZIP went kaput!")
+                        raise zipfile.BadZipFile("Sarcophagus corrupted!")
                 return True
             except Exception as e:
-                print(f"{Fore.RED}🚫 Compression flopped: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Mummification failed: {e}{Style.RESET_ALL}")
                 return False
             finally:
                 temp_gzip.unlink(missing_ok=True)
@@ -195,13 +195,13 @@ if __name__ == "__main__":
                         pass
                 return '.bin'
             except Exception:
-                print(f"{Fore.RED}🚫 File type? Beats me, going with .bin!{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Scroll type unknown, assuming .bin!{Style.RESET_ALL}")
                 return '.bin'
 
-        # *POP!* Unzipping your file back to its original glory!
+        # *POP!* Unwrapping your file from its sacred bandages!
         def decompress(self, zip_path: str, output_path: str) -> Tuple[bool, str]:
             try:
-                spinner("Decompressing file...")
+                spinner("Unwrapping file...")
                 temp_extract = Path(self.config.get('temp_dir')) / 'extracted'
                 os.makedirs(temp_extract, exist_ok=True)
                 
@@ -210,7 +210,7 @@ if __name__ == "__main__":
                 
                 gz_files = list(temp_extract.glob('*.gz'))
                 if not gz_files:
-                    print(f"{Fore.RED}🚫 No .gz file in the ZIP. What’s going on?{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 No .gz scroll in the sarcophagus!{Style.RESET_ALL}")
                     return False, ''
                 
                 temp_output = temp_extract / 'temp_decompressed'
@@ -222,19 +222,19 @@ if __name__ == "__main__":
                 shutil.move(temp_output, output_path)
                 
                 if not os.path.exists(output_path):
-                    print(f"{Fore.RED}🚫 Output file vanished: {output_path}{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Scroll vanished: {output_path}{Style.RESET_ALL}")
                     return False, ''
                 
                 return True, extension
             except Exception as e:
-                print(f"{Fore.RED}🚫 Decompression went poof: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Unwrapping failed: {e}{Style.RESET_ALL}")
                 return False, ''
             finally:
                 if temp_extract.exists():
                     shutil.rmtree(temp_extract, ignore_errors=True)
 
     class AESEncryptor:
-        # I'm the vault, locking your files with AES-256 like a superhero!
+        # I'm the sentinel, sealing files with Anubis’ sacred AES-256!
         def __init__(self, config: EncryptionConfig):
             self.config = config
 
@@ -262,10 +262,10 @@ if __name__ == "__main__":
                 filename = filename.replace(char, '_')
             return filename
 
-        # *ZAP!* Locking your file in a super-secure .enc cage!
+        # *ZAP!* Sealing your file in the Anubis Vault!
         def encrypt(self, input_path: str, password: str, output_dir: Path) -> Optional[str]:
             try:
-                spinner("Encrypting file...")
+                spinner("Sealing scroll...")
                 salt = secrets.token_bytes(self.config.get('salt_length'))
                 iv = secrets.token_bytes(self.config.get('iv_length'))
                 input_hash = self._calculate_hash(input_path)
@@ -291,13 +291,13 @@ if __name__ == "__main__":
                 
                 return str(output_path)
             except Exception as e:
-                print(f"{Fore.RED}🚫 Encryption fizzled: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Sealing failed: {e}{Style.RESET_ALL}")
                 return None
 
-        # *BOOM!* Busting your file out of its .enc prison!
+        # *BOOM!* Releasing your file from the Anubis Vault!
         def decrypt(self, input_path: str, password: str, output_dir: Path) -> Optional[str]:
             try:
-                spinner("Decrypting file...")
+                spinner("Unlocking vault...")
                 with open(input_path, 'rb') as f:
                     salt = f.read(self.config.get('salt_length'))
                     iv = f.read(self.config.get('iv_length'))
@@ -323,18 +323,18 @@ if __name__ == "__main__":
                                 out_file.write(decrypted_chunk)
                             except ValueError as e:
                                 output_path.unlink(missing_ok=True)
-                                print(f"{Fore.RED}🚫 Wrong key or busted file: {e}{Style.RESET_ALL}")
+                                print(f"{Fore.RED}🚫 Wrong key or cursed file: {e}{Style.RESET_ALL}")
                                 return None
                     
                     calculated_hash = self._calculate_hash(output_path)
                     if calculated_hash != stored_hash:
                         output_path.unlink(missing_ok=True)
-                        print(f"{Fore.RED}🚫 File’s been tampered with! Expected {stored_hash}, got {calculated_hash}{Style.RESET_ALL}")
+                        print(f"{Fore.RED}🚫 Scroll tampered! Expected {stored_hash}, got {calculated_hash}{Style.RESET_ALL}")
                         return None
                     
                     return str(output_path)
             except Exception as e:
-                print(f"{Fore.RED}🚫 Decryption crashed: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Vault unlock failed: {e}{Style.RESET_ALL}")
                 return None
             finally:
                 if 'output_path' in locals() and os.path.exists(output_path):
@@ -342,7 +342,7 @@ if __name__ == "__main__":
                         output_path.unlink(missing_ok=True)
 
     class StegoHandler:
-        # I'm the sneaky ninja, hiding files in images like a comic book spy!
+        # I'm the shadow scribe, hiding secrets in hieroglyphs!
         SUPPORTED_FORMATS = {'.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff', '.webp'}
 
         def __init__(self, config: EncryptionConfig):
@@ -362,7 +362,7 @@ if __name__ == "__main__":
             side = int(math.ceil(math.sqrt(pixels_needed)))
             return f"{side}x{side}"
 
-        # *BAM!* Hiding your file in a PNG like it’s wearing an invisibility cloak!
+        # *BAM!* Concealing your scroll in a sacred sarcophagus!
         def hide(self, data_path: str, carrier_image: str, validator: callable) -> Optional[str]:
             while True:
                 try:
@@ -372,11 +372,11 @@ if __name__ == "__main__":
                     
                     input_ext = Path(carrier_image).suffix.lower()
                     if input_ext not in self.SUPPORTED_FORMATS:
-                        print(f"{Fore.RED}🚫 Bad image format {input_ext}. Try {', '.join(self.SUPPORTED_FORMATS)}!{Style.RESET_ALL}")
+                        print(f"{Fore.RED}🚫 Invalid sarcophagus format {input_ext}. Use {', '.join(self.SUPPORTED_FORMATS)}!{Style.RESET_ALL}")
                         return None
                     
-                    spinner("Preparing stego image...")
-                    temp_carrier = Path(self.config.get('temp_dir')) / 'temp_carrier.png'
+                    spinner("Crafting hieroglyphs...")
+                    temp_carrier = Path(self.config.get('temp_dir')) / 'temp_sarcophagus.png'
                     with Image.open(carrier_image) as img:
                         if img.mode != 'RGB':
                             img = img.convert('RGB')
@@ -388,7 +388,7 @@ if __name__ == "__main__":
                     data_size = len(data)
                     encoded_data = base64.b64encode(data).decode('utf-8')
                     encoded_size = len(encoded_data)
-                    print(f"{Fore.YELLOW}Hiding {data_path} ({data_size} bytes, hash: {data_hash}){Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}Concealing {data_path} ({data_size} bytes, hash: {data_hash}){Style.RESET_ALL}")
                     
                     carrier_size = os.path.getsize(temp_carrier)
                     max_stego_size = carrier_size * 1.2
@@ -397,17 +397,17 @@ if __name__ == "__main__":
                         max_capacity = width * height // 8
                         if encoded_size > max_capacity:
                             required_dims = self._estimate_required_dimensions(encoded_size)
-                            print(f"{Fore.YELLOW}⚠️ Image too tiny! Need {encoded_size} bytes, got {max_capacity}{Style.RESET_ALL}")
-                            print(f"{Fore.YELLOW}Grab a bigger image, like {required_dims} pixels!{Style.RESET_ALL}")
-                            retry = input(f"{Fore.CYAN}Try a new image? (y/n): {Style.RESET_ALL}").lower()
+                            print(f"{Fore.YELLOW}⚠️ Sarcophagus too small! Need {encoded_size} bytes, got {max_capacity}{Style.RESET_ALL}")
+                            print(f"{Fore.YELLOW}Use a larger image, like {required_dims} pixels!{Style.RESET_ALL}")
+                            retry = input(f"{Fore.CYAN}Try a new sarcophagus? (y/n): {Style.RESET_ALL}").lower()
                             if retry == 'y':
-                                carrier_image = input(f"{Fore.CYAN}Enter image path (e.g., /path/to/image.png): {Style.RESET_ALL}")
+                                carrier_image = input(f"{Fore.CYAN}Enter image path (e.g., /path/to/sarcophagus.png): {Style.RESET_ALL}")
                                 continue
                             else:
-                                print(f"{Fore.YELLOW}No stego, but your file’s safe at: {data_path}{Style.RESET_ALL}")
+                                print(f"{Fore.YELLOW}No concealment, but your scroll’s safe at: {data_path}{Style.RESET_ALL}")
                                 return None
                         if encoded_size + carrier_size > max_stego_size:
-                            print(f"{Fore.RED}🚫 Stego image would be HUGE. Try a smaller file!{Style.RESET_ALL}")
+                            print(f"{Fore.RED}🚫 Hieroglyphs too large. Use a smaller scroll!{Style.RESET_ALL}")
                             return None
                     
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -418,52 +418,52 @@ if __name__ == "__main__":
                     stego_img = lsb.hide(str(temp_carrier), encoded_data)
                     stego_img.save(output_path, 'PNG', compress_level=9, optimize=True)
                     
-                    print(f"{Fore.GREEN}✅ Stego image ready: {output_path} ({os.path.getsize(output_path)} bytes){Style.RESET_ALL}")
+                    print(f"{Fore.GREEN}✅ *BAM!* Concealed in the sarcophagus: {output_path} ({os.path.getsize(output_path)} bytes){Style.RESET_ALL}")
                     return str(output_path)
                 except Exception as e:
-                    print(f"{Fore.RED}🚫 Stego mission failed: {e}{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Concealment failed: {e}{Style.RESET_ALL}")
                     return None
                 finally:
                     temp_carrier.unlink(missing_ok=True)
 
-        # *WHOOSH!* Yanking your file out of its PNG hideout!
+        # *WHOOSH!* Unveiling your scroll from its hieroglyphs!
         def extract(self, image_path: str, output_path: str) -> bool:
             try:
-                spinner("Extracting stego data...")
+                spinner("Deciphering hieroglyphs...")
                 ext = Path(image_path).suffix.lower()
                 if ext not in {'.png'}:
-                    print(f"{Fore.RED}🚫 Only PNGs for stego extraction, sorry!{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Only PNG sarcophagi for extraction!{Style.RESET_ALL}")
                     return False
                 
                 encoded_data = lsb.reveal(image_path)
                 if encoded_data is None:
-                    print(f"{Fore.RED}🚫 No secret data in this image. You sure it’s stego’d?{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 No secrets in this sarcophagus!{Style.RESET_ALL}")
                     return False
                 
                 if isinstance(encoded_data, bytes):
                     encoded_data = encoded_data.decode('utf-8')
                 elif not isinstance(encoded_data, str):
-                    print(f"{Fore.RED}🚫 Weird data in the image. Not our stuff!{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Strange hieroglyphs detected!{Style.RESET_ALL}")
                     return False
                 
                 try:
                     data = base64.b64decode(encoded_data)
                 except Exception as e:
-                    print(f"{Fore.RED}🚫 Base64 decode went kablooey: {e}{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Hieroglyphs unreadable: {e}{Style.RESET_ALL}")
                     return False
                 
                 data_size = len(data)
                 data_hash = self._calculate_hash(data)
                 with open(output_path, 'wb') as f:
                     f.write(data)
-                print(f"{Fore.GREEN}✅ Pulled {data_size} bytes to {output_path} (hash: {data_hash}){Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✅ *WHOOSH!* Unveiled {data_size} bytes to {output_path} (hash: {data_hash}){Style.RESET_ALL}")
                 return True
             except Exception as e:
-                print(f"{Fore.RED}🚫 Stego extraction flunked: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Deciphering failed: {e}{Style.RESET_ALL}")
                 return False
 
     class EncryptionTool:
-        # I'm the mastermind, running the show for encryption, decryption, and sneaky stego!
+        # I'm Anubis, guardian of the vault, overseeing all sacred rites!
         def __init__(self):
             self.config = EncryptionConfig()
             self.compressor = FileCompressor(self.config)
@@ -478,28 +478,28 @@ if __name__ == "__main__":
 
         def _validate_path(self, path: str, is_input: bool = True, is_carrier: bool = False) -> Optional[str]:
             if not path or path.lower() == 'q':
-                print(f"{Fore.YELLOW}⚠️ Cancelled!{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}⚠️ Ritual cancelled!{Style.RESET_ALL}")
                 return None
             path = path.strip()
             path = os.path.expanduser(path)
             if not (path.startswith('/') or path.startswith(os.path.expanduser('~'))):
-                print(f"{Fore.RED}🚫 Relative path? Nah, use absolute like /path/to/file!{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Relative path? Use absolute like /path/to/scroll!{Style.RESET_ALL}")
                 return None
             if not os.path.exists(path):
-                print(f"{Fore.RED}🚫 Path’s playing hide-and-seek: {path}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Scroll’s lost in the sands: {path}{Style.RESET_ALL}")
                 return None
             if is_input and not os.path.isfile(path):
-                print(f"{Fore.RED}🚫 Need a file, not a folder: {path}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Need a scroll, not a tomb: {path}{Style.RESET_ALL}")
                 return None
             if is_input and not os.access(path, os.R_OK):
-                print(f"{Fore.RED}🚫 Can’t read this file: {path}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Can’t read this scroll: {path}{Style.RESET_ALL}")
                 return None
             if is_carrier and Path(path).suffix.lower() not in self.stego.SUPPORTED_FORMATS:
-                print(f"{Fore.RED}🚫 Wrong image type {Path(path).suffix}. Use {', '.join(self.stego.SUPPORTED_FORMATS)}!{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Wrong sarcophagus type {Path(path).suffix}. Use {', '.join(self.stego.SUPPORTED_FORMATS)}!{Style.RESET_ALL}")
                 return None
             return path
 
-        # *KAPOW!* Encrypting your file and maybe hiding it in a PNG!
+        # *KA-POW!* Sealing your scroll in the Anubis Vault!
         def encrypt_file(self, input_path: str, password: str) -> bool:
             temp_zip = None
             try:
@@ -507,33 +507,33 @@ if __name__ == "__main__":
                 if not input_path:
                     return False
                 
-                print(f"{Fore.BLUE}--- Compressing ---{Style.RESET_ALL}")
+                print(f"{Fore.BLUE}--- Mummifying ---{Style.RESET_ALL}")
                 temp_zip = Path(self.config.get('temp_dir')) / f"{Path(input_path).name}.zip"
                 if not self.compressor.compress(input_path, str(temp_zip)):
                     return False
-                print(f"{Fore.GREEN}✅ Squashed: {input_path} -> {temp_zip} ({os.path.getsize(temp_zip)} bytes){Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✅ Mummified: {input_path} -> {temp_zip} ({os.path.getsize(temp_zip)} bytes){Style.RESET_ALL}")
                 
-                print(f"{Fore.BLUE}--- Encrypting ---{Style.RESET_ALL}")
+                print(f"{Fore.BLUE}--- Sealing ---{Style.RESET_ALL}")
                 output_dir = self._create_output_dir('encrypted')
                 enc_path = self.encryptor.encrypt(str(temp_zip), password, output_dir)
                 if not enc_path:
                     return False
-                print(f"{Fore.GREEN}✅ *ZAP!* Locked tight: {input_path} -> {enc_path}{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✅ *ZAP!* Sealed in the Anubis Vault: {input_path} -> {enc_path}{Style.RESET_ALL}")
                 
-                print(f"{Fore.BLUE}--- Steganography ---{Style.RESET_ALL}")
-                hide = input(f"{Fore.CYAN}Hide in an image? (y/n, needs a big PNG like 1920x1080): {Style.RESET_ALL}").lower()
+                print(f"{Fore.BLUE}--- Concealment ---{Style.RESET_ALL}")
+                hide = input(f"{Fore.CYAN}Hide in a sarcophagus? (y/n, needs a large PNG like 1920x1080): {Style.RESET_ALL}").lower()
                 if hide == 'y':
-                    carrier_image = input(f"{Fore.CYAN}Enter image path (e.g., /path/to/image.png, q to cancel): {Style.RESET_ALL}")
+                    carrier_image = input(f"{Fore.CYAN}Enter sarcophagus path (e.g., /path/to/sarcophagus.png, q to cancel): {Style.RESET_ALL}")
                     stego_path = self.stego.hide(enc_path, carrier_image, self._validate_path)
                     if stego_path:
-                        print(f"{Fore.GREEN}✅ *BAM!* Hidden like a ninja: {stego_path}{Style.RESET_ALL}")
+                        print(f"{Fore.GREEN}✅ *BAM!* Concealed in the sarcophagus: {stego_path}{Style.RESET_ALL}")
                     else:
-                        print(f"{Fore.YELLOW}⚠️ No stego, but your file’s safe at: {enc_path}{Style.RESET_ALL}")
+                        print(f"{Fore.YELLOW}⚠️ No concealment, but your scroll’s safe at: {enc_path}{Style.RESET_ALL}")
                 
-                print(f"{Fore.GREEN}🎉 Success! Your encrypted file is at: {enc_path}{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}🎉 Success! Your sealed scroll is at: {enc_path}{Style.RESET_ALL}")
                 return True
             except Exception as e:
-                print(f"{Fore.RED}🚫 Encryption went splat: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Sealing ritual failed: {e}{Style.RESET_ALL}")
                 return False
             finally:
                 if temp_zip is not None:
@@ -542,7 +542,7 @@ if __name__ == "__main__":
                     shutil.rmtree(self.config.get('temp_dir'), ignore_errors=True)
                     os.makedirs(self.config.get('temp_dir'))
 
-        # *WHAM!* Freeing your file from its .enc or PNG cage!
+        # *WHAM!* Releasing your scroll from the Anubis Vault!
         def decrypt_file(self, input_path: str, password: str) -> bool:
             zip_path = None
             temp_output = None
@@ -554,30 +554,30 @@ if __name__ == "__main__":
                 actual_input = input_path
                 is_stego = input_path.endswith('.png')
                 if is_stego:
-                    print(f"{Fore.BLUE}--- Extracting Stego ---{Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}--- Deciphering Sarcophagus ---{Style.RESET_ALL}")
                     temp_enc = Path(self.config.get('temp_dir')) / 'extracted.enc'
                     if not self.stego.extract(input_path, str(temp_enc)):
                         return False
                     actual_input = str(temp_enc)
                 
-                print(f"{Fore.BLUE}--- Decrypting ---{Style.RESET_ALL}")
+                print(f"{Fore.BLUE}--- Unlocking ---{Style.RESET_ALL}")
                 output_dir = self._create_output_dir('decrypted')
                 zip_path = self.encryptor.decrypt(actual_input, password, output_dir)
                 if not zip_path:
                     return False
-                print(f"{Fore.GREEN}✅ *BOOM!* Cracked open: {actual_input} -> {zip_path} ({os.path.getsize(zip_path)} bytes){Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✅ *BOOM!* Unlocked: {actual_input} -> {zip_path} ({os.path.getsize(zip_path)} bytes){Style.RESET_ALL}")
                 
                 if is_stego:
-                    original_name = input(f"{Fore.CYAN}Original file name (no extension, e.g., example_file, q to cancel): {Style.RESET_ALL}")
+                    original_name = input(f"{Fore.CYAN}Original scroll name (no extension, e.g., papyrus, q to cancel): {Style.RESET_ALL}")
                     if not original_name or original_name.lower() == 'q':
-                        print(f"{Fore.YELLOW}⚠️ Cancelled!{Style.RESET_ALL}")
+                        print(f"{Fore.YELLOW}⚠️ Ritual cancelled!{Style.RESET_ALL}")
                         return False
                     original_name = self.encryptor._sanitize_filename(original_name)
                     original_name = Path(original_name).stem
                 else:
                     original_name = Path(Path(input_path).stem).stem
                 
-                print(f"{Fore.BLUE}--- Decompressing ---{Style.RESET_ALL}")
+                print(f"{Fore.BLUE}--- Unwrapping ---{Style.RESET_ALL}")
                 temp_output = output_dir / f"{original_name}_temp"
                 success, extension = self.compressor.decompress(zip_path, str(temp_output))
                 if not success:
@@ -588,13 +588,13 @@ if __name__ == "__main__":
                     shutil.move(temp_output, final_output)
                 
                 if not final_output.exists():
-                    print(f"{Fore.RED}🚫 Output file pulled a Houdini: {final_output}{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Scroll vanished: {final_output}{Style.RESET_ALL}")
                     return False
-                print(f"{Fore.GREEN}✅ *WHAM!* Freed: {input_path} -> {final_output} ({os.path.getsize(final_output)} bytes){Style.RESET_ALL}")
-                print(f"{Fore.GREEN}🎉 Success! Your decrypted file is at: {final_output}{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✅ *WHAM!* Released from the Anubis Vault: {input_path} -> {final_output} ({os.path.getsize(final_output)} bytes){Style.RESET_ALL}")
+                print(f"{Fore.GREEN}🎉 Success! Your scroll is at: {final_output}{Style.RESET_ALL}")
                 return True
             except Exception as e:
-                print(f"{Fore.RED}🚫 Decryption tanked: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Unlocking ritual failed: {e}{Style.RESET_ALL}")
                 return False
             finally:
                 if is_stego and os.path.exists(actual_input):
@@ -607,20 +607,20 @@ if __name__ == "__main__":
                     shutil.rmtree(self.config.get('temp_dir'), ignore_errors=True)
                     os.makedirs(self.config.get('temp_dir'))
 
-        # *TWEAK!* Letting you fiddle with the config like a mad scientist!
+        # *TWEAK!* Carving new runes into Anubis’ vault!
         def configure(self) -> None:
-            print(f"{Fore.BLUE}=== Configuration Station 🛠️ ==={Style.RESET_ALL}")
-            print(f"{Fore.YELLOW}Current settings (hit Enter to keep, q to exit):{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}=== Rune Carving Chamber 🛠️ ==={Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}Current runes (hit Enter to keep, q to exit):{Style.RESET_ALL}")
             
             try:
                 for key in self.config.config:
-                    comment = self.config._comments.get(key, "No description available.")
+                    comment = self.config._comments.get(key, "No inscription available.")
                     print(f"\n{Fore.BLUE}--- {key} ---{Style.RESET_ALL}")
-                    print(f"{Fore.YELLOW}Description: {comment}{Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}Inscription: {comment}{Style.RESET_ALL}")
                     print(f"{Fore.YELLOW}Current: {self.config.get(key)}{Style.RESET_ALL}")
-                    value = input(f"{Fore.CYAN}New value: {Style.RESET_ALL}")
+                    value = input(f"{Fore.CYAN}New rune: {Style.RESET_ALL}")
                     if value.lower() == 'q':
-                        print(f"{Fore.YELLOW}⚠️ Config editing cancelled!{Style.RESET_ALL}")
+                        print(f"{Fore.YELLOW}⚠️ Rune carving cancelled!{Style.RESET_ALL}")
                         return
                     if value:
                         if key in ['iterations', 'salt_length', 'iv_length', 'key_length']:
@@ -641,54 +641,54 @@ if __name__ == "__main__":
                         self.config.set(key, value)
                 
                 if self.config.save_config():
-                    print(f"{Fore.GREEN}✅ Config saved! You’re a genius!{Style.RESET_ALL}")
+                    print(f"{Fore.GREEN}✅ Runes carved! Anubis is pleased!{Style.RESET_ALL}")
                 else:
-                    print(f"{Fore.RED}🚫 Config save failed. Blame the gremlins!{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Rune carving failed. Curse the sands!{Style.RESET_ALL}")
             except Exception as e:
-                print(f"{Fore.RED}🚫 Config tweak went haywire: {e}{Style.RESET_ALL}")
+                print(f"{Fore.RED}🚫 Rune carving disrupted: {e}{Style.RESET_ALL}")
 
-        # *BZZT!* The main show, where you pick your encryption adventure!
+        # *BZZT!* The grand ritual, where Anubis guides your path!
         def run(self) -> None:
             while True:
                 os.system('clear' if os.name == 'posix' else 'cls')
                 print(f"{Fore.BLUE}=============================={Style.RESET_ALL}")
-                print(f"{Fore.BLUE}    Advanced Encryption Tool  {Style.RESET_ALL}")
-                print(f"{Fore.BLUE}  *ZAP!* Secure Files in a Snap!  {Style.RESET_ALL}")
+                print(f"{Fore.BLUE}        Anubis Vault          {Style.RESET_ALL}")
+                print(f"{Fore.BLUE}Protected by the Guardian of Secrets!{Style.RESET_ALL}")
                 print(f"{Fore.BLUE}=============================={Style.RESET_ALL}")
-                print(f"  {Fore.CYAN}[1] Encrypt File{Style.RESET_ALL}")
-                print(f"  {Fore.CYAN}[2] Decrypt File{Style.RESET_ALL}")
-                print(f"  {Fore.CYAN}[3] Configure Settings{Style.RESET_ALL}")
-                print(f"  {Fore.CYAN}[4] Exit{Style.RESET_ALL}")
+                print(f"  {Fore.CYAN}[1] Seal Scroll{Style.RESET_ALL}")
+                print(f"  {Fore.CYAN}[2] Release Scroll{Style.RESET_ALL}")
+                print(f"  {Fore.CYAN}[3] Carve Runes{Style.RESET_ALL}")
+                print(f"  {Fore.CYAN}[4] Depart{Style.RESET_ALL}")
                 print(f"{Fore.BLUE}------------------------------{Style.RESET_ALL}")
                 
-                choice = input(f"{Fore.CYAN}Pick your poison: {Style.RESET_ALL}").strip()
+                choice = input(f"{Fore.CYAN}Choose your ritual: {Style.RESET_ALL}").strip()
                 
                 if choice == '1':
-                    print(f"{Fore.BLUE}=== Encryption Mission ==={Style.RESET_ALL}")
-                    print(f"{Fore.BLUE}--- File Selection ---{Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}=== Sealing Ritual ==={Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}--- Scroll Selection ---{Style.RESET_ALL}")
                     valid_paths = []
                     while True:
-                        path = input(f"{Fore.CYAN}File to encrypt (absolute path like /path/to/file.pdf, q to cancel): {Style.RESET_ALL}")
+                        path = input(f"{Fore.CYAN}Scroll to seal (absolute path like /path/to/secret_scroll.txt, q to cancel): {Style.RESET_ALL}")
                         validated_path = self._validate_path(path)
                         if validated_path:
                             valid_paths.append(validated_path)
                         elif path.lower() == 'q':
                             break
-                        add_another = input(f"{Fore.CYAN}Add another file? (y/n): {Style.RESET_ALL}").lower()
+                        add_another = input(f"{Fore.CYAN}Add another scroll? (y/n): {Style.RESET_ALL}").lower()
                         if add_another != 'y':
                             break
                     if not valid_paths:
-                        print(f"{Fore.YELLOW}⚠️ No files selected. Back to the menu!{Style.RESET_ALL}")
+                        print(f"{Fore.YELLOW}⚠️ No scrolls chosen. Back to the chamber!{Style.RESET_ALL}")
                         input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                         continue
-                    print(f"{Fore.YELLOW}Selected files: {', '.join(valid_paths)}{Style.RESET_ALL}")
-                    print(f"{Fore.BLUE}--- Password ---{Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}Chosen scrolls: {', '.join(valid_paths)}{Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}--- Sacred Oath ---{Style.RESET_ALL}")
                     print(f"{Fore.YELLOW}💡 Use 12+ chars with letters, numbers, symbols!{Style.RESET_ALL}")
-                    password = getpass(f"{Fore.CYAN}Password: {Style.RESET_ALL}")
-                    confirm = getpass(f"{Fore.CYAN}Confirm password: {Style.RESET_ALL}")
+                    password = getpass(f"{Fore.CYAN}Oath: {Style.RESET_ALL}")
+                    confirm = getpass(f"{Fore.CYAN}Confirm oath: {Style.RESET_ALL}")
                     os.system('clear' if os.name == 'posix' else 'cls')
                     if password != confirm:
-                        print(f"{Fore.RED}🚫 Passwords don’t match. Try again, champ!{Style.RESET_ALL}")
+                        print(f"{Fore.RED}🚫 Oaths don’t match. Swear again, guardian!{Style.RESET_ALL}")
                         input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                         continue
                     for path in valid_paths:
@@ -696,26 +696,26 @@ if __name__ == "__main__":
                     input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                 
                 elif choice == '2':
-                    print(f"{Fore.BLUE}=== Decryption Mission ==={Style.RESET_ALL}")
-                    print(f"{Fore.BLUE}--- File Selection ---{Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}=== Release Ritual ==={Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}--- Scroll Selection ---{Style.RESET_ALL}")
                     valid_paths = []
                     while True:
-                        path = input(f"{Fore.CYAN}File to decrypt (.enc or .png, absolute path like /path/to/file, q to cancel): {Style.RESET_ALL}")
+                        path = input(f"{Fore.CYAN}Scroll to release (.enc or .png, absolute path like /path/to/scroll, q to cancel): {Style.RESET_ALL}")
                         validated_path = self._validate_path(path)
                         if validated_path:
                             valid_paths.append(validated_path)
                         elif path.lower() == 'q':
                             break
-                        add_another = input(f"{Fore.CYAN}Add another file? (y/n): {Style.RESET_ALL}").lower()
+                        add_another = input(f"{Fore.CYAN}Add another scroll? (y/n): {Style.RESET_ALL}").lower()
                         if add_another != 'y':
                             break
                     if not valid_paths:
-                        print(f"{Fore.YELLOW}⚠️ No files selected. Back to the menu!{Style.RESET_ALL}")
+                        print(f"{Fore.YELLOW}⚠️ No scrolls chosen. Back to the chamber!{Style.RESET_ALL}")
                         input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                         continue
-                    print(f"{Fore.YELLOW}Selected files: {', '.join(valid_paths)}{Style.RESET_ALL}")
-                    print(f"{Fore.BLUE}--- Password ---{Style.RESET_ALL}")
-                    password = getpass(f"{Fore.CYAN}Password: {Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}Chosen scrolls: {', '.join(valid_paths)}{Style.RESET_ALL}")
+                    print(f"{Fore.BLUE}--- Sacred Oath ---{Style.RESET_ALL}")
+                    password = getpass(f"{Fore.CYAN}Oath: {Style.RESET_ALL}")
                     os.system('clear' if os.name == 'posix' else 'cls')
                     for path in valid_paths:
                         self.decrypt_file(path, password)
@@ -726,15 +726,15 @@ if __name__ == "__main__":
                     input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                 
                 elif choice == '4':
-                    print(f"{Fore.GREEN}🎉 Peace out! Keep those files safe!{Style.RESET_ALL}")
+                    print(f"{Fore.GREEN}🎉 Depart in peace! Anubis guards your secrets!{Style.RESET_ALL}")
                     break
                 
                 elif choice == '42':
-                    print(f"{Fore.YELLOW}🌌 The Answer to Life, the Universe, and Encryption!{Style.RESET_ALL}")
+                    print(f"{Fore.YELLOW}🌌 The Answer to Life, the Universe, and the Anubis Vault!{Style.RESET_ALL}")
                     input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
                 
                 else:
-                    print(f"{Fore.RED}🚫 Bad choice. Pick a number, not a riddle!{Style.RESET_ALL}")
+                    print(f"{Fore.RED}🚫 Invalid ritual. Choose a number, not a riddle!{Style.RESET_ALL}")
                     input(f"{Fore.CYAN}Press Enter to continue...{Style.RESET_ALL}")
 
     tool = EncryptionTool()
