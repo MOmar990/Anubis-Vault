@@ -1,174 +1,178 @@
 # Advanced Encryption Tool
 
-A Python-based command-line tool for secure file encryption, decryption, and steganography. This tool uses AES-256 encryption with PBKDF2 key derivation, supports file compression, and offers optional steganography to hide encrypted files within PNG images. It is designed for ease of use, security, and flexibility, making it suitable for protecting sensitive files.
+![Python](https://img.shields.io/badge/Python-3.6%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
+*ZAP!* Secure your files with military-grade AES-256 encryption, hide them in images like a comic-book ninja, and enjoy a colorful, user-friendly interface! The **Advanced Encryption Tool** is your go-to solution for protecting sensitive data, complete with a dependency wizard that magically handles setup. Perfect for developers, security enthusiasts, and anyone who loves a touch of superhero flair.
+
+## Introduction
+
+This tool combines robust AES-256 encryption, stealthy steganography, and file compression into a single, easy-to-use Python application. Whether you’re locking down documents or hiding secrets in PNGs, the tool’s vibrant UI and automated dependency wizard make it a breeze. Run it, follow the prompts, and let the wizard install any missing packages (`cryptography`, `stegano`, `Pillow`, `colorama`)—no cape required!
 
 ## Features
 
-- **AES-256 Encryption**: Encrypt files using AES-256 in CBC mode with secure key derivation (PBKDF2, SHA256).
-- **File Compression**: Compress files using gzip and ZIP before encryption to reduce size.
-- **Steganography**: Hide encrypted files in PNG images using least significant bit (LSB) steganography, with capacity checks and retry prompts.
-- **File Type Detection**: Automatically detect and restore file extensions (`.txt`, `.pdf`, `.docx`, etc.) during decryption.
-- **Path Handling**: Supports paths with spaces and `~` expansion for user convenience.
-- **Configurability**: Customize settings like salt length, iterations, and output directories via `encryption_config.json`.
-- **Integrity Checks**: Verify file integrity using SHA256 hashes during decryption.
-- **Temporary File Cleanup**: Automatically remove temporary files after processing (configurable).
-- **Multiple File Support**: Encrypt or decrypt multiple files in a single session.
+- **AES-256 Encryption**: Lock files with industry-standard encryption, secured by a password-derived key.
+- **Steganography**: *BAM!* Hide encrypted files inside PNG images for extra stealth.
+- **File Compression**: Squash files before encryption to save space and speed things up.
+- **Colorful UI**: Enjoy a vibrant, comic-book-style interface with clear prompts, progress spinners, and organized output.
+- **Dependency Wizard**: Automatically detects and installs missing dependencies on first run.
+- **Configurable Settings**: Tweak salt length, PBKDF2 iterations, and output directories via a guided menu.
+- **Cross-Platform**: Runs smoothly on Windows, Linux, and macOS.
+- **Integrity Checks**: Verifies file integrity with SHA-256 hashes to detect tampering.
+- **Easter Egg**: Try menu option “42” for a cosmic surprise!
 
 ## Installation
 
 ### Prerequisites
-- Python 3.6 or higher
-- Required Python packages:
-  - `cryptography`
-  - `stegano`
-  - `Pillow`
+- Python 3.6 or higher.
+- `pip` for installing dependencies.
 
-### Setup
-1. Clone the repository:
+### Steps
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/yourusername/advanced-encryption-tool.git
    cd advanced-encryption-tool
    ```
 
-2. Install dependencies:
+2. **Run the Tool**:
    ```bash
-   pip install cryptography stegano Pillow
+   python enhanced-encryption-tool.py
+   ```
+   On first run, the **dependency wizard** checks for `cryptography`, `stegano`, `Pillow`, and `colorama`. If any are missing, it prompts to install them automatically. Just type `y` to let it work its magic!
+
+3. **Manual Dependency Installation** (if you prefer):
+   ```bash
+   pip install cryptography stegano Pillow colorama
    ```
 
-3. Ensure `encryption_config.json` is in the project directory (included in the repository).
-
-4. Run the tool:
+4. **Virtual Environment** (recommended):
    ```bash
+   python -m venv myenv
+   source myenv/bin/activate  # On Windows: myenv\Scripts\activate
+   pip install cryptography stegano Pillow colorama
    python enhanced-encryption-tool.py
    ```
 
 ## Usage
 
-Launch the tool with:
-```bash
-python enhanced-encryption-tool.py
-```
+1. **Launch the Tool**:
+   ```bash
+   python enhanced-encryption-tool.py
+   ```
+   You’ll see a colorful menu:
+   ```
+   ==============================
+       Advanced Encryption Tool
+     *ZAP!* Secure Files in a Snap!
+   ==============================
+     [1] Encrypt File
+     [2] Decrypt File
+     [3] Configure Settings
+     [4] Exit
+   ------------------------------
+   Pick your poison:
+   ```
 
-### Main Menu
-```
-Advanced Encryption Tool
-1. Encrypt file
-2. Decrypt file
-3. Configure settings
-4. Exit
+2. **Encrypt a File**:
+   - Choose `[1] Encrypt File`.
+   - Enter the absolute path to your file (e.g., `/path/to/document.pdf`).
+   - Add more files or proceed.
+   - Set a strong password (12+ characters, mix letters, numbers, symbols).
+   - Optionally hide the encrypted file in a PNG (needs a large image, e.g., 1920x1080).
+   - Example:
+     ```bash
+     File to encrypt (absolute path like /path/to/file.pdf, q to cancel): /home/user/test.txt
+     Add another file? (y/n): n
+     Password: ********
+     Confirm password: ********
+     Hide in an image? (y/n, needs a big PNG like 1920x1080): y
+     Enter image path (e.g., /path/to/image.png, q to cancel): /home/user/carrier.png
+     ```
+   - Output: Encrypted file in `secure_files/encrypted/<timestamp>/` and optional stego PNG in `secure_files/stego/<timestamp>/`.
 
-Select an option:
-```
+3. **Decrypt a File**:
+   - Choose `[2] Decrypt File`.
+   - Enter the path to the `.enc` file or stego `.png`.
+   - Provide the password.
+   - For stego, specify the original file name (without extension).
+   - Example:
+     ```bash
+     File to decrypt (.enc or .png, absolute path like /path/to/file, q to cancel): secure_files/stego/20250504_180303/carrier.png
+     Add another file? (y/n): n
+     Password: ********
+     Original file name (no extension, e.g., example_file, q to cancel): test
+     ```
+   - Output: Decrypted file in `secure_files/decrypted/<timestamp>/` with detected extension (e.g., `.txt`).
 
-#### 1. Encrypt File
-- Input one or more file paths (absolute paths recommended, e.g., `/path/to/file.pdf`).
-- Supports paths with spaces and `~` expansion.
-- Enter and confirm a password.
-- Optionally hide the encrypted file in a PNG image (steganography).
-- Output: Encrypted files in `secure_files/encrypted/<timestamp>/` (`.enc`) or stego images in `secure_files/stego/<timestamp>/` (`.png`).
+4. **Configure Settings**:
+   - Choose `[3] Configure Settings`.
+   - Adjust settings like `salt_length` or `output_dir` with descriptions from `encryption_config.json`.
+   - Example:
+     ```
+     --- salt_length ---
+     Description: Bytes for the salt. More = spicier security! Stick with 32 unless you're feeling wild.
+     Current: 32
+     New value: 64
+     ```
 
-**Example**:
-```
-Select an option: 1
-Enter the file path to encrypt (e.g., /path/to/file.pdf): /path/to/document.pdf
-Add another file? (y/n): n
-Enter password: ******
-Confirm password: ******
-Compressed: /path/to/document.pdf -> .temp/document.pdf.zip (123456 bytes)
-Successfully encrypted: /path/to/document.pdf -> secure_files/encrypted/20250504_180303/document.pdf.enc
-Hide in image? (y/n): y
-Enter the carrier image path (e.g., /path/to/image.png): /path/to/carrier.png
-Hiding data: secure_files/encrypted/20250504_180303/document.pdf.enc (123456 bytes, hash: abc123..., base64: 164608 bytes)
-Stego image saved: secure_files/stego/20250504_180303/carrier.png (345678 bytes)
-```
+5. **Tips**:
+   - Use absolute paths (e.g., `/home/user/file.txt`, not `file.txt`).
+   - For stego, ensure the carrier image is large enough (tool suggests dimensions if too small).
+   - Cancel any prompt with `q`.
+   - Check `encryption_config.json` for advanced settings.
 
-#### 2. Decrypt File
-- Input paths to `.enc` files or stego `.png` files.
-- Enter the password used for encryption.
-- For stego, provide the original file name (without extension).
-- Output: Decrypted files in `secure_files/decrypted/<timestamp>/` with detected extensions (e.g., `.pdf`, `.docx`).
+## Screenshots
 
-**Example**:
-```
-Select an option: 2
-Enter the file path to decrypt (e.g., /path/to/file.enc or /path/to/file.png): secure_files/encrypted/20250504_180303/document.pdf.enc
-Add another file? (y/n): n
-Enter password: ******
-Decrypted: secure_files/encrypted/20250504_180303/document.pdf.enc -> secure_files/decrypted/20250504_180304/document (123456 bytes)
-Successfully decrypted: secure_files/encrypted/20250504_180303/document.pdf.enc -> secure_files/decrypted/20250504_180304/document.pdf (123456 bytes)
-```
+*Coming soon! Add screenshots of the colorful UI, menu, or encryption process to showcase the comic-book style. For now, try running the tool to see the vibrant interface!*
 
-#### 3. Configure Settings
-- Modify settings like PBKDF2 iterations, salt length, output directories, or compression level.
-- Changes are saved to `encryption_config.json`.
+## Troubleshooting
 
-**Example**:
-```
-Select an option: 3
-Current Configuration:
-salt_length: 32
-iv_length: 16
-...
-Enter new values (press Enter to keep current):
-PBKDF2 iterations [500000]: 600000
-...
-Configuration saved successfully
-```
+- **Dependency Wizard Fails**:
+  - Ensure `pip` is installed and accessible:
+    ```bash
+    python -m ensurepip --upgrade
+    python -m pip install --upgrade pip
+    ```
+  - Install manually:
+    ```bash
+    pip install cryptography stegano Pillow colorama
+    ```
+  - Check permissions or use `--user`:
+    ```bash
+    pip install cryptography stegano Pillow colorama --user
+    ```
 
-#### 4. Exit
-- Exit the tool.
+- **Path Errors**:
+  - Use absolute paths (e.g., `/home/user/file.txt`).
+  - Ensure files exist and are readable.
 
-### Steganography Notes
-- **Carrier Image**: Use a PNG, JPG, BMP, GIF, TIFF, or WebP image with sufficient capacity (width × height / 8 bytes).
-- **Capacity Check**: If the carrier is too small, the tool prompts to retry with a larger image or skip steganography.
-- **Decryption**: For stego images, you must provide the original file name (without extension) to restore the file.
+- **Stego Image Too Small**:
+  - The tool will suggest required dimensions (e.g., “Need a 1920x1080 PNG”).
+  - Use a larger PNG or skip stego.
 
-## File Structure
-- `enhanced-encryption-tool.py`: Main script.
-- `encryption_config.json`: Configuration file.
-- `.temp/`: Temporary directory for compression and stego processing (cleaned up by default).
-- `secure_files/`:
-  - `encrypted/<timestamp>/`: Encrypted `.enc` files.
-  - `decrypted/<timestamp>/`: Decrypted files.
-  - `stego/<timestamp>/`: Stego PNG images.
+- **Password Issues**:
+  - Ensure the password matches the one used for encryption.
+  - Use strong passwords (12+ characters, mixed characters).
 
-## Configuration
-Edit `encryption_config.json` to customize:
-- `salt_length`: Salt length for key derivation (default: 32 bytes).
-- `iv_length`: Initialization vector length (default: 16 bytes).
-- `key_length`: AES key length (default: 32 bytes for AES-256).
-- `iterations`: PBKDF2 iterations (default: 500000).
-- `compression_level`: ZIP compression level (1–9, default: 9).
-- `output_dir`: Base output directory (default: `secure_files`).
-- `temp_dir`: Temporary directory (default: `.temp`).
-- `stego_dir`: Stego output directory (default: `secure_files/stego`).
-- `hash_algorithm`: Hash algorithm for integrity (default: `sha256`).
-- `cleanup_temp`: Remove temporary files (default: `true`).
-
-## Security Considerations
-- **Password**: Choose a strong password; it’s critical for AES-256 security.
-- **Steganography**: Ensure carrier images are large enough for the encrypted data (base64 increases size by ~33%).
-- **Temporary Files**: Enable `cleanup_temp` to avoid leaving sensitive data on disk.
-- **Integrity**: The tool verifies file integrity during decryption using SHA256 hashes.
+- **Still Stuck?**:
+  - Open an issue on GitHub with the error message and steps to reproduce.
 
 ## Contributing
-Contributions are welcome! To contribute:
+
+We’d love your help to make this tool even more super! To contribute:
 1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add YourFeature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
+2. Create a feature branch (`git checkout -b feature/awesome-update`).
+3. Commit changes (`git commit -m "Add awesome update"`).
+4. Push to the branch (`git push origin feature/awesome-update`).
+5. Open a pull request with a clear description.
 
-Please include tests and update documentation for new features.
-
-## Issues
-Report bugs or suggest features by opening an issue on the [GitHub repository](https://github.com/yourusername/advanced-encryption-tool/issues).
+Please follow the code style, keep the comic-book tone, and add tests for new features.
 
 ## License
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-Built with Python and powered by:
-- [cryptography](https://cryptography.io/)
-- [stegano](https://github.com/cedricbonhomme/Stegano)
-- [Pillow](https://pillow.readthedocs.io/)
+## Contact
+
+Have questions or ideas? Open an issue on GitHub or contribute directly. Let’s make encryption fun and secure! *WHAM!*
